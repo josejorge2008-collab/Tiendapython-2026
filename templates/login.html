@@ -1,42 +1,30 @@
 <!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Login - Sistema</title>
+    <title>Login - Tienda</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-<body class="login-body">
+<body>
 
-    <div class="login-container">
-        
-        <h2>Bienvenido</h2>
-        <p class="subtitulo">Inicia sesión en tu cuenta</p>
+    <h2>Iniciar Sesión</h2>
 
-        {% with mensajes = get_flashed_messages() %}
-            {% if mensajes %}
-                {% for mensaje in mensajes %}
-                    <div class="alerta">{{ mensaje }}</div>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
+    {% with mensajes = get_flashed_messages() %}
+        {% if mensajes %}
+            {% for mensaje in mensajes %}
+                <p>{{ mensaje }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
 
-        <form action="/login" method="POST">
+    <form action="/login" method="POST">
 
-            <div class="input-group">
-                <input type="email" name="correo" required>
-                <label>Correo electrónico</label>
-            </div>
+        <input type="email" name="correo" placeholder="Correo" required>
 
-            <div class="input-group">
-                <input type="password" name="clave" required>
-                <label>Contraseña</label>
-            </div>
+        <input type="password" name="clave" placeholder="Contraseña" required>
 
-            <button type="submit">Ingresar</button>
+        <button type="submit">Ingresar</button>
 
-        </form>
-
-    </div>
+    </form>
 
 </body>
 </html>
