@@ -2,41 +2,28 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Login - Sistema</title>
+    <title>Login</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-<body class="login-body">
+<body>
 
-    <div class="login-container">
-        
-        <h2>Bienvenido</h2>
-        <p class="subtitulo">Inicia sesión en tu cuenta</p>
+<div class="login-container">
+    <h2>Iniciar Sesión</h2>
 
-        {% with mensajes = get_flashed_messages() %}
-            {% if mensajes %}
-                {% for mensaje in mensajes %}
-                    <div class="alerta">{{ mensaje }}</div>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
-
-        <form action="/login" method="POST">
-
-            <div class="input-group">
-                <input type="email" name="correo" required>
-                <label>Correo electrónico</label>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="error">
+                {{ messages[0] }}
             </div>
+        {% endif %}
+    {% endwith %}
 
-            <div class="input-group">
-                <input type="password" name="clave" required>
-                <label>Contraseña</label>
-            </div>
-
-            <button type="submit">Ingresar</button>
-
-        </form>
-
-    </div>
+    <form method="POST">
+        <input type="email" name="correo" placeholder="Correo" required>
+        <input type="password" name="password" placeholder="Contraseña" required>
+        <button type="submit">Ingresar</button>
+    </form>
+</div>
 
 </body>
 </html>
