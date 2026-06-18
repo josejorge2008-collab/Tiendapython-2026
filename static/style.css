@@ -19,7 +19,6 @@
     width: 95%;
     min-height: 550px;
     overflow: hidden;
-    margin: 20px; /* Asegura que no pegue a los bordes */
 }
 
 /* Columna de la imagen */
@@ -33,7 +32,7 @@
     align-items: center;
     color: white;
     text-align: center;
-    min-width: 280px;
+    min-width: 300px;
 }
 
 .login-image-content i {
@@ -74,7 +73,7 @@
     align-items: center;
     padding: 40px;
     background: white;
-    min-width: 320px;
+    min-width: 350px;
 }
 
 .login-form-box {
@@ -215,13 +214,11 @@
         max-width: 450px;
         min-height: auto;
         border-radius: 15px;
-        margin: 20px;
     }
     
     .login-image {
         min-width: auto;
         padding: 30px 20px;
-        min-height: 200px;
     }
     
     .login-image-content i {
@@ -245,8 +242,6 @@
 @media (max-width: 480px) {
     .login-container {
         width: 98%;
-        margin: 10px;
-        border-radius: 12px;
     }
     
     .login-form-box h1 {
@@ -261,18 +256,5 @@
     .login-btn {
         padding: 12px;
         font-size: 15px;
-    }
-    
-    .login-image {
-        padding: 20px 15px;
-        min-height: 150px;
-    }
-    
-    .login-image-content i {
-        font-size: 40px;
-    }
-    
-    .login-image-content h2 {
-        font-size: 1.5rem;
     }
 }
