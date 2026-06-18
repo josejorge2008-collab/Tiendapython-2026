@@ -6,12 +6,12 @@
     margin: 0 auto;
     padding: 30px 20px;
     min-height: 100vh;
-    background: #f0f2f5;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
 }
 
 /* Header del index */
 .index-header {
-    background: linear-gradient(135deg, #1a237e 0%, #0d47a1 100%);
+    background: rgba(0, 0, 0, 0.5);
     padding: 30px 40px;
     border-radius: 15px;
     margin-bottom: 30px;
@@ -20,11 +20,12 @@
     align-items: center;
     flex-wrap: wrap;
     gap: 20px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    border: 1px solid rgba(212, 175, 55, 0.1);
 }
 
 .index-header h1 {
-    color: white;
+    color: #d4af37;
     margin: 0;
     font-size: 2rem;
     border: none;
@@ -44,21 +45,24 @@
 }
 
 .user-info .user-email {
-    background: rgba(255,255,255,0.2);
+    background: rgba(212, 175, 55, 0.15);
     padding: 8px 18px;
     border-radius: 20px;
     display: flex;
     align-items: center;
     gap: 8px;
+    color: #d4af37;
+    border: 1px solid rgba(212, 175, 55, 0.2);
 }
 
 .user-info .user-email i {
     font-size: 16px;
+    color: #d4af37;
 }
 
 .btn-logout {
-    background: rgba(255,255,255,0.2);
-    color: white;
+    background: rgba(255,255,255,0.05);
+    color: #d4af37;
     padding: 8px 20px;
     border-radius: 20px;
     text-decoration: none;
@@ -66,14 +70,15 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    border: 2px solid transparent;
+    border: 1px solid rgba(212, 175, 55, 0.2);
 }
 
 .btn-logout:hover {
     background: #c62828;
+    color: white;
     transform: scale(1.05);
     text-decoration: none;
-    border-color: white;
+    border-color: #c62828;
 }
 
 /* Grid de tarjetas */
@@ -85,18 +90,19 @@
 }
 
 .card {
-    background: white;
+    background: rgba(50, 50, 50, 0.8);
     padding: 40px 30px;
     border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     text-align: center;
     transition: all 0.3s;
-    border: 2px solid transparent;
+    border: 1px solid rgba(212, 175, 55, 0.1);
     position: relative;
     overflow: hidden;
+    backdrop-filter: blur(10px);
 }
 
-/* Iconos decorativos en las tarjetas */
+/* Línea decorativa dorada en las tarjetas */
 .card::before {
     content: '';
     position: absolute;
@@ -104,7 +110,7 @@
     left: 0;
     right: 0;
     height: 5px;
-    background: linear-gradient(90deg, #1a237e, #0d47a1);
+    background: linear-gradient(90deg, #d4af37, #b8960f, #d4af37);
     opacity: 0;
     transition: opacity 0.3s;
 }
@@ -115,25 +121,26 @@
 
 .card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 12px 35px rgba(26, 35, 126, 0.2);
-    border-color: #1a237e;
+    box-shadow: 0 12px 35px rgba(212, 175, 55, 0.15);
+    border-color: #d4af37;
+    background: rgba(60, 60, 60, 0.9);
 }
 
 .card .card-icon {
     font-size: 48px;
-    color: #1a237e;
+    color: #d4af37;
     margin-bottom: 15px;
     display: block;
 }
 
 .card h2 {
-    color: #1a237e;
+    color: #d4af37;
     margin-bottom: 12px;
     font-size: 1.5rem;
 }
 
 .card p {
-    color: #666;
+    color: #cccccc;
     line-height: 1.6;
     background: transparent;
     padding: 0;
@@ -172,6 +179,8 @@
     .user-info {
         justify-content: center;
         width: 100%;
+        flex-direction: column;
+        gap: 10px;
     }
     
     .contenedor-cards {
@@ -200,6 +209,17 @@
     .user-info {
         flex-direction: column;
         gap: 10px;
+        width: 100%;
+    }
+    
+    .user-info .user-email {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .btn-logout {
+        width: 100%;
+        justify-content: center;
     }
     
     .card .card-icon {
