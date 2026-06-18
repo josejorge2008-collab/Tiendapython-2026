@@ -11,9 +11,24 @@
         <!-- Columna de la imagen -->
         <div class="login-image">
             <div class="login-image-content">
-                <i class="fas fa-store"></i>
+                <!-- Logo con estilo mejorado -->
+                <div class="logo-container">
+                    <img src="{{ url_for('static', filename='uploads/logo.png') }}" 
+                         alt="Logo Tienda" 
+                         class="logo-image">
+                </div>
+                
                 <h2>Tienda 2026</h2>
                 <p>Sistema de gestión de ventas</p>
+                
+                <!-- Línea decorativa -->
+                <div class="login-divider"></div>
+                
+                <!-- Texto adicional -->
+                <div class="login-tagline">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Gestión inteligente</span>
+                </div>
             </div>
         </div>
         

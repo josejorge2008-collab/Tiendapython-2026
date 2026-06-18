@@ -15,17 +15,18 @@
     background: white;
     border-radius: 20px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-    max-width: 900px;
+    max-width: 1000px;
     width: 95%;
-    min-height: 550px;
+    min-height: 600px;
     overflow: hidden;
+    margin: 20px;
 }
 
-/* Columna de la imagen */
+/* ===== COLUMNA IZQUIERDA - IMAGEN ===== */
 .login-image {
     flex: 1;
     background: linear-gradient(135deg, #1a237e 0%, #0d47a1 100%);
-    padding: 40px;
+    padding: 50px 40px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -33,21 +34,72 @@
     color: white;
     text-align: center;
     min-width: 300px;
+    position: relative;
+    overflow: hidden;
 }
 
-.login-image-content i {
-    font-size: 80px;
+/* Fondo con patrón decorativo */
+.login-image::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+    animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.login-image-content {
+    position: relative;
+    z-index: 1;
+}
+
+/* Contenedor del logo */
+.logo-container {
     margin-bottom: 20px;
-    color: #fff;
-    animation: float 3s ease-in-out infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-image {
+    width: 130px;
+    height: 130px;
+    object-fit: contain;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    padding: 15px;
+    border: 3px solid rgba(255,255,255,0.3);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    transition: all 0.3s;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.logo-image:hover {
+    transform: scale(1.05);
+    border-color: rgba(255,255,255,0.6);
+}
+
+/* Animación de pulso para el logo */
+@keyframes pulse {
+    0% { box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
+    50% { box-shadow: 0 8px 40px rgba(255,255,255,0.3); }
+    100% { box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
 }
 
 .login-image-content h2 {
     font-size: 2.5rem;
-    margin: 10px 0;
+    margin: 10px 0 5px;
     color: white;
     font-weight: 700;
     letter-spacing: 2px;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.2);
 }
 
 .login-image-content p {
@@ -56,16 +108,36 @@
     background: transparent;
     border: none;
     padding: 0;
+    margin-bottom: 20px;
 }
 
-/* Animación de flotación */
-@keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-    100% { transform: translateY(0px); }
+/* Línea decorativa */
+.login-divider {
+    width: 60px;
+    height: 3px;
+    background: rgba(255,255,255,0.4);
+    margin: 15px auto;
+    border-radius: 2px;
 }
 
-/* Columna del formulario */
+/* Tagline */
+.login-tagline {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,255,255,0.15);
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    margin-top: 5px;
+    backdrop-filter: blur(10px);
+}
+
+.login-tagline i {
+    color: #4caf50;
+}
+
+/* ===== COLUMNA DERECHA - FORMULARIO ===== */
 .login-form-container {
     flex: 1;
     display: flex;
@@ -73,7 +145,7 @@
     align-items: center;
     padding: 40px;
     background: white;
-    min-width: 350px;
+    min-width: 320px;
 }
 
 .login-form-box {
@@ -214,15 +286,19 @@
         max-width: 450px;
         min-height: auto;
         border-radius: 15px;
+        margin: 20px;
     }
     
     .login-image {
         min-width: auto;
         padding: 30px 20px;
+        min-height: 200px;
     }
     
-    .login-image-content i {
-        font-size: 60px;
+    .logo-image {
+        width: 100px;
+        height: 100px;
+        padding: 12px;
     }
     
     .login-image-content h2 {
@@ -242,6 +318,8 @@
 @media (max-width: 480px) {
     .login-container {
         width: 98%;
+        margin: 10px;
+        border-radius: 12px;
     }
     
     .login-form-box h1 {
@@ -256,5 +334,29 @@
     .login-btn {
         padding: 12px;
         font-size: 15px;
+    }
+    
+    .login-image {
+        padding: 20px 15px;
+        min-height: 150px;
+    }
+    
+    .logo-image {
+        width: 80px;
+        height: 80px;
+        padding: 10px;
+    }
+    
+    .login-image-content h2 {
+        font-size: 1.5rem;
+    }
+    
+    .login-image-content p {
+        font-size: 0.9rem;
+    }
+    
+    .login-tagline {
+        font-size: 0.8rem;
+        padding: 6px 15px;
     }
 }
