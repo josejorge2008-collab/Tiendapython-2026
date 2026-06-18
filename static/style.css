@@ -3,7 +3,7 @@
     margin: 0;
     padding: 0;
     min-height: 100vh;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -12,9 +12,9 @@
 
 .login-container {
     display: flex;
-    background: white;
+    background: #f8f8f8;
     border-radius: 20px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
     max-width: 1000px;
     width: 95%;
     min-height: 600px;
@@ -25,20 +25,20 @@
 /* ===== COLUMNA IZQUIERDA - IMAGEN ===== */
 .login-image {
     flex: 1;
-    background: linear-gradient(135deg, #1a237e 0%, #0d47a1 100%);
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
     padding: 50px 40px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: white;
+    color: #d4af37;
     text-align: center;
     min-width: 300px;
     position: relative;
     overflow: hidden;
 }
 
-/* Fondo con patrón decorativo */
+/* Fondo con patrón decorativo dorado */
 .login-image::before {
     content: '';
     position: absolute;
@@ -46,7 +46,7 @@
     right: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
     animation: rotate 20s linear infinite;
 }
 
@@ -73,49 +73,50 @@
     height: 130px;
     object-fit: contain;
     border-radius: 50%;
-    background: rgba(255,255,255,0.15);
+    background: rgba(212, 175, 55, 0.1);
     padding: 15px;
-    border: 3px solid rgba(255,255,255,0.3);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    border: 3px solid rgba(212, 175, 55, 0.4);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
     transition: all 0.3s;
     animation: pulse 2s ease-in-out infinite;
 }
 
 .logo-image:hover {
     transform: scale(1.05);
-    border-color: rgba(255,255,255,0.6);
+    border-color: rgba(212, 175, 55, 0.8);
 }
 
 /* Animación de pulso para el logo */
 @keyframes pulse {
-    0% { box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
-    50% { box-shadow: 0 8px 40px rgba(255,255,255,0.3); }
-    100% { box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
+    0% { box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+    50% { box-shadow: 0 8px 40px rgba(212, 175, 55, 0.2); }
+    100% { box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
 }
 
 .login-image-content h2 {
     font-size: 2.5rem;
     margin: 10px 0 5px;
-    color: white;
+    color: #d4af37;
     font-weight: 700;
     letter-spacing: 2px;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
 }
 
 .login-image-content p {
     font-size: 1.1rem;
-    opacity: 0.9;
+    opacity: 0.8;
     background: transparent;
     border: none;
     padding: 0;
     margin-bottom: 20px;
+    color: #cccccc;
 }
 
-/* Línea decorativa */
+/* Línea decorativa dorada */
 .login-divider {
     width: 60px;
     height: 3px;
-    background: rgba(255,255,255,0.4);
+    background: linear-gradient(90deg, transparent, #d4af37, transparent);
     margin: 15px auto;
     border-radius: 2px;
 }
@@ -125,16 +126,18 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    background: rgba(255,255,255,0.15);
+    background: rgba(212, 175, 55, 0.1);
     padding: 8px 20px;
     border-radius: 20px;
     font-size: 0.9rem;
     margin-top: 5px;
     backdrop-filter: blur(10px);
+    color: #d4af37;
+    border: 1px solid rgba(212, 175, 55, 0.2);
 }
 
 .login-tagline i {
-    color: #4caf50;
+    color: #d4af37;
 }
 
 /* ===== COLUMNA DERECHA - FORMULARIO ===== */
@@ -144,7 +147,7 @@
     justify-content: center;
     align-items: center;
     padding: 40px;
-    background: white;
+    background: #f8f8f8;
     min-width: 320px;
 }
 
@@ -154,7 +157,7 @@
 }
 
 .login-form-box h1 {
-    color: #1a237e;
+    color: #1a1a1a;
     font-size: 2rem;
     margin-bottom: 5px;
     border: none;
@@ -162,7 +165,7 @@
 }
 
 .login-subtitle {
-    color: #666;
+    color: #666666;
     font-size: 0.95rem;
     margin-bottom: 30px;
     background: transparent;
@@ -186,41 +189,41 @@
 .form-group label {
     display: block;
     margin-bottom: 8px;
-    color: #333;
+    color: #333333;
     font-weight: 500;
     font-size: 0.95rem;
 }
 
 .form-group label i {
     margin-right: 8px;
-    color: #1a237e;
+    color: #d4af37;
 }
 
 .form-group input {
     width: 100%;
     padding: 14px 16px;
-    border: 2px solid #e0e0e0;
+    border: 2px solid #d4d4d4;
     border-radius: 10px;
     font-size: 16px;
     transition: all 0.3s;
-    background: #f8f9fa;
+    background: #ffffff;
 }
 
 .form-group input:focus {
-    border-color: #1a237e;
-    background: white;
-    box-shadow: 0 0 0 4px rgba(26, 35, 126, 0.1);
+    border-color: #d4af37;
+    background: #ffffff;
+    box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.1);
     outline: none;
 }
 
 .form-group input::placeholder {
-    color: #aaa;
+    color: #aaaaaa;
 }
 
 .login-btn {
-    background: linear-gradient(135deg, #1a237e 0%, #0d47a1 100%);
-    color: white;
-    border: none;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    color: #d4af37;
+    border: 1px solid rgba(212, 175, 55, 0.3);
     padding: 14px;
     border-radius: 10px;
     font-size: 17px;
@@ -237,46 +240,50 @@
 
 .login-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(26, 35, 126, 0.3);
-    background: linear-gradient(135deg, #0d47a1 0%, #1a237e 100%);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
+    border-color: #d4af37;
+    color: #d4af37;
 }
 
 .login-footer {
     margin-top: 25px;
     text-align: center;
-    color: #666;
+    color: #666666;
 }
 
 .login-footer a {
-    color: #1a237e;
+    color: #d4af37;
     font-weight: 600;
     text-decoration: none;
 }
 
 .login-footer a:hover {
     text-decoration: underline;
+    color: #b8960f;
 }
 
 /* Mensajes flash en login */
 .flash-message {
-    background: #e8f5e9;
+    background: rgba(212, 175, 55, 0.1);
     padding: 12px 16px;
     border-radius: 10px;
-    border-left: 4px solid #4caf50;
+    border-left: 4px solid #d4af37;
     margin: 15px 0 20px 0;
-    color: #2e7d32;
+    color: #1a1a1a;
     font-weight: 500;
 }
 
 .flash-message i {
     margin-right: 8px;
+    color: #d4af37;
 }
 
 /* Error flash */
 .flash-message.error {
-    background: #ffebee;
-    border-left-color: #c62828;
-    color: #b71c1c;
+    background: rgba(180, 0, 0, 0.1);
+    border-left-color: #8b0000;
+    color: #8b0000;
 }
 
 /* ===== RESPONSIVE LOGIN ===== */
