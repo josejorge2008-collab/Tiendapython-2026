@@ -2,37 +2,316 @@
 <html>
 <head>
     <title>Registrar Producto</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        /* Estilos específicos para registrar producto */
+        body {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 40px 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .registro-container {
+            max-width: 600px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .registro-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .registro-header h1 {
+            color: #d4af37;
+            font-size: 2.2rem;
+            margin: 0 0 10px 0;
+            border: none;
+            padding: 0;
+        }
+
+        .registro-header h1 i {
+            margin-right: 12px;
+        }
+
+        .registro-header .subtitle {
+            color: #aaaaaa;
+            font-size: 0.95rem;
+        }
+
+        .btn-volver {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #d4af37;
+            text-decoration: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            transition: all 0.3s;
+            margin-bottom: 20px;
+        }
+
+        .btn-volver:hover {
+            background: rgba(212, 175, 55, 0.1);
+            transform: translateX(-5px);
+            text-decoration: none;
+        }
+
+        hr {
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            margin: 20px 0;
+        }
+
+        /* Mensajes flash */
+        .flash-message {
+            background: rgba(212, 175, 55, 0.1);
+            padding: 12px 16px;
+            border-radius: 10px;
+            border-left: 4px solid #d4af37;
+            margin: 15px 0 20px 0;
+            color: #d4af37;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .flash-message i {
+            font-size: 18px;
+        }
+
+        /* Formulario */
+        .registro-form {
+            background: transparent;
+            padding: 0;
+            box-shadow: none;
+            max-width: 100%;
+            margin: 0;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #d4af37;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .form-group label i {
+            margin-right: 8px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid rgba(212, 175, 55, 0.2);
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s;
+            background: rgba(255, 255, 255, 0.05);
+            color: #ffffff;
+        }
+
+        .form-group input::placeholder {
+            color: #888888;
+        }
+
+        .form-group input:focus {
+            border-color: #d4af37;
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.1);
+            outline: none;
+        }
+
+        /* Input file personalizado */
+        .form-group input[type="file"] {
+            padding: 12px;
+            cursor: pointer;
+        }
+
+        .form-group input[type="file"]::file-selector-button {
+            background: rgba(212, 175, 55, 0.15);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            color: #d4af37;
+            padding: 8px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .form-group input[type="file"]::file-selector-button:hover {
+            background: rgba(212, 175, 55, 0.25);
+            border-color: #d4af37;
+        }
+
+        /* Botón guardar */
+        .btn-guardar {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: #d4af37;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 14px;
+            border-radius: 10px;
+            font-size: 17px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-guardar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.2);
+            border-color: #d4af37;
+            background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .registro-container {
+                padding: 30px 20px;
+            }
+
+            .registro-header h1 {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .registro-container {
+                padding: 20px 15px;
+            }
+
+            .registro-header h1 {
+                font-size: 1.5rem;
+            }
+
+            .form-group input {
+                padding: 12px 14px;
+                font-size: 15px;
+            }
+
+            .btn-guardar {
+                padding: 12px;
+                font-size: 15px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-    <h1>Registrar Producto</h1>
+    <div class="registro-container">
+        
+        <!-- Header -->
+        <div class="registro-header">
+            <h1>
+                <i class="fas fa-plus-circle"></i> Registrar Producto
+            </h1>
+            <p class="subtitle">Agrega nuevos productos al sistema</p>
+        </div>
 
-    <a href="/">Volver al inicio</a>
+        <!-- Botón volver -->
+        <a href="/" class="btn-volver">
+            <i class="fas fa-arrow-left"></i> Volver al inicio
+        </a>
 
-    <hr>
+        <hr>
 
-    {% with mensajes = get_flashed_messages() %}
-        {% if mensajes %}
-            {% for mensaje in mensajes %}
-                <p>{{ mensaje }}</p>
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
+        <!-- Mensajes flash -->
+        {% with mensajes = get_flashed_messages() %}
+            {% if mensajes %}
+                {% for mensaje in mensajes %}
+                    <div class="flash-message">
+                        <i class="fas fa-check-circle"></i>
+                        {{ mensaje }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
 
-    <form action="/guardar" method="POST" enctype="multipart/form-data">
+        <!-- Formulario -->
+        <form action="/guardar" method="POST" enctype="multipart/form-data" class="registro-form">
 
-        <input type="text" name="nombre" placeholder="Nombre producto" required>
+            <div class="form-group">
+                <label for="nombre">
+                    <i class="fas fa-tag"></i> Nombre del Producto
+                </label>
+                <input 
+                    type="text" 
+                    id="nombre"
+                    name="nombre" 
+                    placeholder="Ej: Laptop HP" 
+                    required
+                >
+            </div>
 
-        <input type="number" step="0.01" name="precio" placeholder="Precio" required>
+            <div class="form-group">
+                <label for="precio">
+                    <i class="fas fa-Bs-sign"></i> Precio
+                </label>
+                <input 
+                    type="number" 
+                    id="precio"
+                    step="0.01" 
+                    name="precio" 
+                    placeholder="0.00" 
+                    required
+                >
+            </div>
 
-        <input type="number" name="stock" placeholder="Stock" required>
+            <div class="form-group">
+                <label for="stock">
+                    <i class="fas fa-boxes"></i> Stock
+                </label>
+                <input 
+                    type="number" 
+                    id="stock"
+                    name="stock" 
+                    placeholder="Cantidad disponible" 
+                    required
+                >
+            </div>
 
-        <input type="file" name="imagen">
+            <div class="form-group">
+                <label for="imagen">
+                    <i class="fas fa-image"></i> Imagen del Producto
+                </label>
+                <input 
+                    type="file" 
+                    id="imagen"
+                    name="imagen"
+                    accept="image/*"
+                >
+            </div>
 
-        <button type="submit">Guardar</button>
+            <button type="submit" class="btn-guardar">
+                <i class="fas fa-save"></i> Guardar Producto
+            </button>
 
-    </form>
+        </form>
+
+    </div>
 
 </body>
 </html>
