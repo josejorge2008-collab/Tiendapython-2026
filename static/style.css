@@ -103,3 +103,43 @@ p{
     margin-bottom: 15px;
     color: green;
 }
+.btn{
+    background:#D4AF37;
+    color:white;
+    border:none;
+    padding:12px 25px;
+    border-radius:8px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.btn:hover{
+    background:#b8901f;
+    transform:translateY(-2px);
+}
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
+
+thead{
+    background:#121212;
+    color:white;
+}
+
+th, td{
+    padding:15px;
+    text-align:center;
+}
+
+tr:nth-child(even){
+    background:#f7f7f7;
+}
+
+tr:hover{
+    background:#fff4cf;
+}
