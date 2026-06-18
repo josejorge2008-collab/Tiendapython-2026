@@ -1,25 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Registrar Producto</title>
+    <title>Ver Productos</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <style>
-        /* Estilos específicos para registrar producto */
+        /* Estilos específicos para ver productos */
         body {
             background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
             min-height: 100vh;
             margin: 0;
             padding: 40px 20px;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
 
-        .registro-container {
-            max-width: 600px;
-            width: 100%;
+        .productos-container {
+            max-width: 1200px;
+            margin: 0 auto;
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
             padding: 40px;
@@ -28,26 +25,32 @@
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
         }
 
-        .registro-header {
-            text-align: center;
+        .productos-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
             margin-bottom: 30px;
         }
 
-        .registro-header h1 {
+        .productos-header h1 {
             color: #d4af37;
             font-size: 2.2rem;
-            margin: 0 0 10px 0;
+            margin: 0;
             border: none;
             padding: 0;
         }
 
-        .registro-header h1 i {
+        .productos-header h1 i {
             margin-right: 12px;
         }
 
-        .registro-header .subtitle {
-            color: #aaaaaa;
-            font-size: 0.95rem;
+        .header-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
         }
 
         .btn-volver {
@@ -60,7 +63,6 @@
             border-radius: 20px;
             border: 1px solid rgba(212, 175, 55, 0.2);
             transition: all 0.3s;
-            margin-bottom: 20px;
         }
 
         .btn-volver:hover {
@@ -74,244 +76,351 @@
             margin: 20px 0;
         }
 
-        /* Mensajes flash */
-        .flash-message {
-            background: rgba(212, 175, 55, 0.1);
-            padding: 12px 16px;
-            border-radius: 10px;
-            border-left: 4px solid #d4af37;
-            margin: 15px 0 20px 0;
-            color: #d4af37;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .flash-message i {
-            font-size: 18px;
-        }
-
-        /* Formulario */
-        .registro-form {
-            background: transparent;
-            padding: 0;
-            box-shadow: none;
-            max-width: 100%;
-            margin: 0;
-        }
-
-        .form-group {
+        /* Buscador */
+        .buscador-wrapper {
+            position: relative;
             margin-bottom: 25px;
         }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
+        .buscador-wrapper i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
             color: #d4af37;
-            font-weight: 500;
-            font-size: 0.95rem;
         }
 
-        .form-group label i {
-            margin-right: 8px;
-        }
-
-        .form-group input {
+        #buscador {
             width: 100%;
-            padding: 14px 16px;
+            max-width: 400px;
+            padding: 12px 18px 12px 45px;
             border: 2px solid rgba(212, 175, 55, 0.2);
-            border-radius: 10px;
+            border-radius: 25px;
             font-size: 16px;
             transition: all 0.3s;
             background: rgba(255, 255, 255, 0.05);
             color: #ffffff;
         }
 
-        .form-group input::placeholder {
+        #buscador::placeholder {
             color: #888888;
         }
 
-        .form-group input:focus {
+        #buscador:focus {
             border-color: #d4af37;
-            background: rgba(255, 255, 255, 0.1);
             box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.1);
             outline: none;
+            background: rgba(255, 255, 255, 0.1);
         }
 
-        /* Input file personalizado */
-        .form-group input[type="file"] {
-            padding: 12px;
-            cursor: pointer;
+        /* Tabla */
+        .tabla-wrapper {
+            overflow-x: auto;
+            border-radius: 15px;
+            border: 1px solid rgba(212, 175, 55, 0.1);
         }
 
-        .form-group input[type="file"]::file-selector-button {
-            background: rgba(212, 175, 55, 0.15);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            color: #d4af37;
-            padding: 8px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 500;
-        }
-
-        .form-group input[type="file"]::file-selector-button:hover {
-            background: rgba(212, 175, 55, 0.25);
-            border-color: #d4af37;
-        }
-
-        /* Botón guardar */
-        .btn-guardar {
-            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-            color: #d4af37;
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            padding: 14px;
-            border-radius: 10px;
-            font-size: 17px;
-            font-weight: 600;
-            cursor: pointer;
+        table {
             width: 100%;
-            transition: all 0.3s;
-            margin-top: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
+            background: rgba(255, 255, 255, 0.03);
+            border-collapse: collapse;
+            border-radius: 15px;
+            overflow: hidden;
         }
 
-        .btn-guardar:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.2);
+        thead {
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        th {
+            color: #d4af37;
+            padding: 16px 20px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border-bottom: 2px solid rgba(212, 175, 55, 0.2);
+        }
+
+        th i {
+            margin-right: 8px;
+        }
+
+        td {
+            padding: 14px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: #cccccc;
+        }
+
+        tr:hover {
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Imágenes en tabla */
+        td img {
+            border-radius: 8px;
+            border: 2px solid rgba(212, 175, 55, 0.2);
+            object-fit: cover;
+            width: 60px;
+            height: 60px;
+            transition: all 0.3s;
+        }
+
+        td img:hover {
+            transform: scale(1.1);
             border-color: #d4af37;
-            background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
+        }
+
+        .sin-imagen {
+            color: #666666;
+            font-style: italic;
+        }
+
+        /* Etiquetas de estado */
+        .stock-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .stock-alto {
+            background: rgba(76, 175, 80, 0.2);
+            color: #81c784;
+            border: 1px solid rgba(76, 175, 80, 0.3);
+        }
+
+        .stock-medio {
+            background: rgba(255, 193, 7, 0.2);
+            color: #ffd54f;
+            border: 1px solid rgba(255, 193, 7, 0.3);
+        }
+
+        .stock-bajo {
+            background: rgba(244, 67, 54, 0.2);
+            color: #ef9a9a;
+            border: 1px solid rgba(244, 67, 54, 0.3);
+        }
+
+        /* Contador de productos */
+        .productos-count {
+            color: #aaaaaa;
+            font-size: 0.95rem;
+            margin-top: 15px;
+            text-align: right;
+        }
+
+        .productos-count span {
+            color: #d4af37;
+            font-weight: 600;
+        }
+
+        /* Mensaje sin productos */
+        .sin-productos {
+            text-align: center;
+            color: #888888;
+            padding: 40px 20px;
+        }
+
+        .sin-productos i {
+            font-size: 48px;
+            color: #d4af37;
+            margin-bottom: 15px;
+            display: block;
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            .registro-container {
-                padding: 30px 20px;
+            .productos-container {
+                padding: 25px 15px;
             }
 
-            .registro-header h1 {
+            .productos-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .productos-header h1 {
                 font-size: 1.8rem;
+            }
+
+            .header-actions {
+                width: 100%;
+            }
+
+            .btn-volver {
+                width: 100%;
+                justify-content: center;
+            }
+
+            #buscador {
+                max-width: 100%;
+            }
+
+            th, td {
+                padding: 10px 12px;
+                font-size: 14px;
+            }
+
+            td img {
+                width: 40px;
+                height: 40px;
             }
         }
 
         @media (max-width: 480px) {
-            .registro-container {
-                padding: 20px 15px;
+            .productos-container {
+                padding: 15px 10px;
             }
 
-            .registro-header h1 {
+            .productos-header h1 {
                 font-size: 1.5rem;
             }
 
-            .form-group input {
-                padding: 12px 14px;
-                font-size: 15px;
+            th, td {
+                padding: 8px 10px;
+                font-size: 12px;
             }
 
-            .btn-guardar {
-                padding: 12px;
-                font-size: 15px;
+            td img {
+                width: 35px;
+                height: 35px;
             }
         }
     </style>
 </head>
 <body>
 
-    <div class="registro-container">
-        
-        <!-- Header -->
-        <div class="registro-header">
-            <h1>
-                <i class="fas fa-plus-circle"></i> Registrar Producto
-            </h1>
-            <p class="subtitle">Agrega nuevos productos al sistema</p>
-        </div>
+    <div class="productos-container">
 
-        <!-- Botón volver -->
-        <a href="/" class="btn-volver">
-            <i class="fas fa-arrow-left"></i> Volver al inicio
-        </a>
+        <!-- Header -->
+        <div class="productos-header">
+            <h1>
+                <i class="fas fa-boxes"></i> Productos Registrados
+            </h1>
+            <div class="header-actions">
+                <a href="/" class="btn-volver">
+                    <i class="fas fa-arrow-left"></i> Volver al inicio
+                </a>
+            </div>
+        </div>
 
         <hr>
 
-        <!-- Mensajes flash -->
-        {% with mensajes = get_flashed_messages() %}
-            {% if mensajes %}
-                {% for mensaje in mensajes %}
-                    <div class="flash-message">
-                        <i class="fas fa-check-circle"></i>
-                        {{ mensaje }}
-                    </div>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
+        <!-- Buscador -->
+        <div class="buscador-wrapper">
+            <i class="fas fa-search"></i>
+            <input 
+                type="text"
+                id="buscador"
+                placeholder="Buscar producto por nombre..."
+            >
+        </div>
 
-        <!-- Formulario -->
-        <form action="/guardar" method="POST" enctype="multipart/form-data" class="registro-form">
+        <!-- Tabla -->
+        <div class="tabla-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th><i class="fas fa-hashtag"></i> ID</th>
+                        <th><i class="fas fa-tag"></i> Nombre</th>
+                        <th><i class="fas fa-dollar-sign"></i> Precio</th>
+                        <th><i class="fas fa-image"></i> Imagen</th>
+                        <th><i class="fas fa-boxes"></i> Stock</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if productos %}
+                        {% for producto in productos %}
+                        <tr class="fila-producto">
+                            <td>{{ producto[0] }}</td>
+                            <td>{{ producto[1] }}</td>
+                            <td>${{ "%.2f"|format(producto[2]) }}</td>
+                            <td>
+                                {% if producto[3] %}
+                                    <img 
+                                        src="{{ url_for('static', filename='uploads/' + producto[3]) }}"
+                                        alt="{{ producto[1] }}"
+                                        title="{{ producto[1] }}"
+                                    >
+                                {% else %}
+                                    <span class="sin-imagen">
+                                        <i class="fas fa-image"></i> Sin imagen
+                                    </span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if producto[4] > 20 %}
+                                    <span class="stock-badge stock-alto">
+                                        <i class="fas fa-check-circle"></i> {{ producto[4] }}
+                                    </span>
+                                {% elif producto[4] > 10 %}
+                                    <span class="stock-badge stock-medio">
+                                        <i class="fas fa-exclamation-circle"></i> {{ producto[4] }}
+                                    </span>
+                                {% else %}
+                                    <span class="stock-badge stock-bajo">
+                                        <i class="fas fa-times-circle"></i> {{ producto[4] }}
+                                    </span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="5">
+                                <div class="sin-productos">
+                                    <i class="fas fa-box-open"></i>
+                                    <p>No hay productos registrados</p>
+                                    <a href="/registrar-producto" class="btn-volver" style="display: inline-flex;">
+                                        <i class="fas fa-plus-circle"></i> Agregar producto
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
 
-            <div class="form-group">
-                <label for="nombre">
-                    <i class="fas fa-tag"></i> Nombre del Producto
-                </label>
-                <input 
-                    type="text" 
-                    id="nombre"
-                    name="nombre" 
-                    placeholder="Ej: Laptop HP" 
-                    required
-                >
-            </div>
-
-            <div class="form-group">
-                <label for="precio">
-                    <i class="fas fa-dollar-sign"></i> Precio
-                </label>
-                <input 
-                    type="number" 
-                    id="precio"
-                    step="0.01" 
-                    name="precio" 
-                    placeholder="0.00" 
-                    required
-                >
-            </div>
-
-            <div class="form-group">
-                <label for="stock">
-                    <i class="fas fa-boxes"></i> Stock
-                </label>
-                <input 
-                    type="number" 
-                    id="stock"
-                    name="stock" 
-                    placeholder="Cantidad disponible" 
-                    required
-                >
-            </div>
-
-            <div class="form-group">
-                <label for="imagen">
-                    <i class="fas fa-image"></i> Imagen del Producto
-                </label>
-                <input 
-                    type="file" 
-                    id="imagen"
-                    name="imagen"
-                    accept="image/*"
-                >
-            </div>
-
-            <button type="submit" class="btn-guardar">
-                <i class="fas fa-save"></i> Guardar Producto
-            </button>
-
-        </form>
+        <!-- Contador de productos -->
+        {% if productos %}
+        <div class="productos-count">
+            <i class="fas fa-cubes"></i> Total: <span>{{ productos|length }}</span> productos
+        </div>
+        {% endif %}
 
     </div>
+
+    <script>
+        const buscador = document.getElementById("buscador");
+
+        buscador.addEventListener("keyup", function() {
+            const texto = buscador.value.toLowerCase().trim();
+            const filas = document.querySelectorAll(".fila-producto");
+
+            let contador = 0;
+            filas.forEach(function(fila) {
+                const contenido = fila.textContent.toLowerCase();
+                if (contenido.includes(texto)) {
+                    fila.style.display = "";
+                    contador++;
+                } else {
+                    fila.style.display = "none";
+                }
+            });
+
+            // Actualizar contador
+            const contadorSpan = document.querySelector(".productos-count span");
+            if (contadorSpan) {
+                contadorSpan.textContent = contador;
+            }
+        });
+    </script>
 
 </body>
 </html>
