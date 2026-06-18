@@ -1,52 +1,63 @@
 <!DOCTYPE html>
 <html>
 <head>
-
     <title>Sistema Tienda</title>
-
-    <link rel="stylesheet"
-    href="{{ url_for('static', filename='style.css') }}">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
 </head>
-
 <body>
 
-    <h1>Bienvenido al Sistema</h1>
+    <div class="index-container">
+        
+        <!-- Header mejorado -->
+        <header class="index-header">
+            <h1>
+                <i class="fas fa-store"></i> Sistema Tienda 2026
+            </h1>
+            
+            <div class="user-info">
+                <span class="user-email">
+                    <i class="fas fa-user-circle"></i>
+                    {{ session["correo"] }}
+                </span>
+                <a href="/logout" class="btn-logout">
+                    <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                </a>
+            </div>
+        </header>
 
-    <p>
-        Usuario:
-        {{ session["correo"] }}
-    </p>
+        <!-- Tarjetas -->
+        <div class="contenedor-cards">
 
-    <a href="/logout">
-        Cerrar Sesión
-    </a>
+            <a href="/registrar-producto" class="card">
+                <i class="fas fa-plus-circle card-icon"></i>
+                <h2>Registrar Productos</h2>
+                <p>
+                    Permite agregar nuevos productos
+                    al sistema.
+                </p>
+            </a>
 
-    <hr>
+            <a href="/ver-productos" class="card">
+                <i class="fas fa-list card-icon"></i>
+                <h2>Ver Productos</h2>
+                <p>
+                    Permite visualizar todos los
+                    productos registrados.
+                </p>
+            </a>
 
-    <div class="contenedor-cards">
+            <a href="/ventas" class="card">
+                <i class="fas fa-shopping-cart card-icon"></i>
+                <h2>Punto de Venta</h2>
+                <p>
+                    Realiza ventas de forma rápida
+                    y sencilla.
+                </p>
+            </a>
 
-        <a href="/registrar-producto" class="card">
-
-            <h2>Registrar Productos</h2>
-
-            <p>
-                Permite agregar nuevos productos
-                al sistema.
-            </p>
-
-        </a>
-
-        <a href="/ver-productos" class="card">
-
-            <h2>Ver Productos</h2>
-
-            <p>
-                Permite visualizar todos los
-                productos registrados.
-            </p>
-
-        </a>
+        </div>
 
     </div>
 
